@@ -1,5 +1,5 @@
 // src/pages/Login.jsx
-import { ArrowRight, Eye, EyeClosed, School } from "lucide-react";
+import { ArrowRight, Eye, EyeClosed, School, XIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
@@ -7,26 +7,30 @@ import useAuth from "../hooks/useAuth";
 export default function Login() {
     const navigate = useNavigate();
     const user = useAuth();
-
     // const user = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     function handleLogin(e) {
         e?.preventDefault();
         if (!email.trim()) return alert("Masukkan email terlebih dahulu");
         // simpan user sederhana ke localStorage (sesuai flow sebelumnya)
-        console.log(login({ email, password }));
-        navigate("/quiz"); // asumsikan route /quiz ada
+
+        try {
+            user.login({ email, password });
+        } catch (e) {
+            setErrorMsg(e.message);
+            return;
+        }
     }
 
     useEffect(() => {
-        console.log("user", user);
-        if (user) {
-            navigate("/quiz");
+        if (user.isAuthenticated) {
+            navigate("/");
         }
-    }, [user]);
+    }, [user, navigate]);
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-text-main h-screen flex flex-col overflow-hidden">
@@ -133,6 +137,17 @@ export default function Login() {
                                 Or with email
                             </span>
                             <div className="h-px bg-slate-400 dark:bg-slate-700 flex-1"></div>
+                        </div>
+
+                        <div
+                            hidden={!errorMsg}
+                            className="w-full flex justify-between items-center px-4 py-2 bg-red-200 border border-red-500 text-red-500 text-sm rounded-lg animate-pulse duration-100"
+                        >
+                            {errorMsg}
+                            <XIcon
+                                onClick={() => setErrorMsg("")}
+                                className="size-4 text-gray-800 cursor-pointer"
+                            />
                         </div>
 
                         {/* Login Form */}
