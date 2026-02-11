@@ -2,7 +2,7 @@
 import { ArrowRight, Eye, EyeClosed, School, XIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import useAuth from "../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 export default function Login() {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { DUMMY_USER } from "./auth.config";
+import { DUMMY_USER } from "@/config/auth.config";
 
 const AUTH_KEY = "quiz_auth";
 

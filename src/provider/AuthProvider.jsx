@@ -1,14 +1,14 @@
-import { useEffect, useState, useCallback } from "react";
-import * as authService from "../auth/auth.service";
-import { AuthContext } from "../context/AuthContext";
+import { useEffect, useState } from "react";
+import * as authService from "../service/auth.service";
+import { useCallback } from "react";
+import AuthContext from "../context/auth.context";
 
-export default function AuthProvider({ children }) {
+const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const saved = authService.getAuth();
-        setAuth(saved);
+        setAuth(authService.getAuth());
         setLoading(false);
     }, []);
 
@@ -35,4 +35,6 @@ export default function AuthProvider({ children }) {
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );
-}
+};
+
+export default AuthProvider;
