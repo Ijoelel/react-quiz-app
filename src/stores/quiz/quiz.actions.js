@@ -3,13 +3,31 @@ export const setQuestions = (questions) => ({
     payload: questions,
 });
 
+export const setIndex = (index) => ({
+    type: "QUIZ/SET_INDEX",
+    payload: index,
+});
+
 export const startQuiz = () => ({
     type: "QUIZ/START",
+});
+
+export const tick = () => ({
+    type: "QUIZ/TICK",
+});
+
+export const setTime = (time) => ({
+    type: "QUIZ/SET_TIME",
+    payload: time,
 });
 
 export const answerQuestion = (answer) => ({
     type: "QUIZ/ANSWER",
     payload: answer,
+});
+
+export const restartQuiz = () => ({
+    type: "QUIZ/RESTART",
 });
 
 export const finishQuiz = () => ({

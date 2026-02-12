@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "@/hooks/useAuth";
 import { useQuizStore } from "../stores/quiz/quiz.store";
-import QuizHeader from "../components/quiz/QuizHeader";
 import QuizSubHeader from "../components/quiz/QuizSubHeader";
 import QuestionCard from "../components/quiz/QuestionCard";
 import AnswerGrid from "../components/quiz/AnswerGrid";
@@ -19,8 +18,15 @@ const Quiz = () => {
         }
     });
 
-    const { questions, currentIndex, answers, answerQuestion, finishQuiz } =
-        useQuizStore();
+    const {
+        questions,
+        currentIndex,
+        answers,
+        timeLeft,
+        answerQuestion,
+        finishQuiz,
+        setIndex,
+    } = useQuizStore();
 
     useEffect(() => {
         if (!questions.length) {
@@ -39,6 +45,17 @@ const Quiz = () => {
             selected: choice,
             correct: currentQuestion.correctAnswer,
         });
+
+        // AUTO NEXT
+        if (currentIndex + 1 < total) {
+            setIndex(currentIndex + 1);
+        }
+    };
+
+    const handleQuestionSelect = (index) => {
+        if (index === currentIndex) return;
+
+        setIndex(index);
     };
 
     return (
@@ -49,9 +66,10 @@ const Quiz = () => {
                 category={currentQuestion.category}
                 current={currentIndex}
                 total={total}
+                timeLeft={timeLeft}
             />
 
-            <main className="grow max-w-7xl mx-auto px-4 py-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <main className="grow max-w-360 mx-auto px-4 py-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-8 flex flex-col gap-8">
                     <QuestionCard
                         question={currentQuestion.question}
@@ -71,6 +89,7 @@ const Quiz = () => {
                     questions={questions}
                     currentIndex={currentIndex}
                     answers={answers}
+                    onSelect={handleQuestionSelect}
                 />
             </main>
 

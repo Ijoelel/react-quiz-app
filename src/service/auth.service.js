@@ -25,5 +25,6 @@ export function logout() {
 
 export function getAuth() {
     const raw = localStorage.getItem(AUTH_KEY);
+    console.log(raw);
     return raw ? JSON.parse(raw) : null;
 }

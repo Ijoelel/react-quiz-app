@@ -1,3 +1,5 @@
+import { Medal } from "lucide-react";
+
 const Leaderboard = () => {
     const rankColors = [
         "bg-[#FFD700]", // Gold
@@ -6,10 +8,8 @@ const Leaderboard = () => {
     ];
     return (
         <div className="bg-primary rounded-3xl p-6 text-white overflow-hidden relative">
-            <div className="absolute -right-4 -bottom-4 opacity-10">
-                <span className="material-symbols-outlined text-[140px]">
-                    military_tech
-                </span>
+            <div className="absolute right-0 bottom-0 opacity-10">
+                <Medal className="size-24" />
             </div>
 
             <h3 className="font-bold text-lg mb-6 relative z-10">

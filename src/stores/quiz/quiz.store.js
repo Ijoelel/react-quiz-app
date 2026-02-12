@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import * as actions from "./quiz.actions";
-import QuizContext from "@/context/quiz.context";
+import QuizContext from "../../context/quiz.context";
 
 export function useQuizStore() {
     const ctx = useContext(QuizContext);
@@ -17,11 +17,16 @@ export function useQuizStore() {
         currentIndex: state.currentIndex,
         answers: state.answers,
         status: state.status,
+        timeLeft: state.timeLeft,
 
         // actions
         setQuestions: (q) => dispatch(actions.setQuestions(q)),
+        setIndex: (i) => dispatch(actions.setIndex(i)),
         startQuiz: () => dispatch(actions.startQuiz()),
+        tick: () => dispatch(actions.tick()),
+        setTime: (t) => dispatch(actions.setTime(t)),
         answerQuestion: (a) => dispatch(actions.answerQuestion(a)),
+        restartQuiz: () => dispatch(actions.restartQuiz()),
         finishQuiz: () => dispatch(actions.finishQuiz()),
         resetQuiz: () => dispatch(actions.resetQuiz()),
     };

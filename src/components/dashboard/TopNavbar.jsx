@@ -1,6 +1,6 @@
 import { Bell, School, Search } from "lucide-react";
 
-const TopNavbar = () => {
+const TopNavbar = ({ user }) => {
     return (
         <header className="sticky top-0 z-50 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
             <div className="max-w-360 mx-auto flex items-center justify-between gap-8">
@@ -36,14 +36,16 @@ const TopNavbar = () => {
 
                     <div className="flex items-center gap-3 cursor-pointer group">
                         <div className="text-right hidden sm:block">
-                            <p className="text-sm font-semibold leading-none">
-                                Alex Johnson
+                            <p className="text-sm font-semibold leading-none dark:text-white">
+                                {user?.name}
                             </p>
                             <p className="text-xs text-slate-500 mt-1">
-                                Lvl 12 Explorer
+                                {user?.email}
                             </p>
                         </div>
-                        <div className="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border-2 border-transparent group-hover:border-primary transition-all shadow-sm" />
+                        <div className="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border-2 border-transparent group-hover:border-primary transition-all shadow-sm">
+                            <img src="https://ui-avatars.com/api/?background=0D8ABC&color=fff" />
+                        </div>
                     </div>
                 </div>
             </div>

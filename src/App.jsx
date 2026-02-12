@@ -3,6 +3,7 @@ import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Quiz from "./pages/Quiz";
+import Result from "./pages/Result";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route index Component={Dashboard} />
                 <Route path="login" Component={Login} />
                 <Route path="quiz" Component={Quiz} />
+                <Route path="result" Component={Result} />
             </Routes>
         </BrowserRouter>
     );

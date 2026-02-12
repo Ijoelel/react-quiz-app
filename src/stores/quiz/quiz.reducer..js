@@ -3,6 +3,7 @@ export const initialQuizState = {
     currentIndex: 0,
     answers: [],
     status: "idle", // idle | ready | in_progress | finished
+    timeLeft: 600,
 };
 
 export function quizReducer(state, action) {
@@ -14,19 +15,52 @@ export function quizReducer(state, action) {
                 status: "ready",
             };
 
+        case "QUIZ/SET_INDEX":
+            return {
+                ...state,
+                currentIndex: action.payload,
+            };
+
         case "QUIZ/START":
             return {
                 ...state,
                 currentIndex: 0,
                 answers: [],
                 status: "in_progress",
+                timeLeft: 600,
             };
 
-        case "QUIZ/ANSWER":
+        case "QUIZ/TICK":
             return {
                 ...state,
-                answers: [...state.answers, action.payload],
-                currentIndex: state.currentIndex + 1,
+                timeLeft: state.timeLeft > 0 ? state.timeLeft - 1 : 0,
+            };
+
+        case "QUIZ/SET_TIME":
+            return {
+                ...state,
+                timeLeft: action.payload,
+            };
+
+        case "QUIZ/ANSWER": {
+            const { questionIndex, selected, correct } = action.payload;
+
+            const updatedAnswers = [...state.answers];
+            updatedAnswers[questionIndex] = { selected, correct };
+
+            return {
+                ...state,
+                answers: updatedAnswers,
+            };
+        }
+
+        case "QUIZ/RESTART":
+            return {
+                ...state,
+                answers: [],
+                currentIndex: 0,
+                status: "in_progress",
+                timeLeft: 600, // reset timer
             };
 
         case "QUIZ/FINISH":
