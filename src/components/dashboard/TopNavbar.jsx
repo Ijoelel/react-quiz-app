@@ -44,7 +44,9 @@ const TopNavbar = ({ user }) => {
                             </p>
                         </div>
                         <div className="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border-2 border-transparent group-hover:border-primary transition-all shadow-sm">
-                            <img src="https://ui-avatars.com/api/?background=0D8ABC&color=fff" />
+                            <img
+                                src={`https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user?.name.split(" ").join("+")}`}
+                            />
                         </div>
                     </div>
                 </div>

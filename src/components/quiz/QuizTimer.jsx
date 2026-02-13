@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useQuizStore } from "../../stores/quiz/quiz.store";
+import { Timer } from "lucide-react";
 
 const QuizTimer = () => {
     const navigate = useNavigate();
@@ -31,9 +32,7 @@ const QuizTimer = () => {
 
     return (
         <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg font-medium border border-slate-200 dark:border-slate-700">
-            <span className="material-symbols-outlined text-primary text-[20px]">
-                timer
-            </span>
+            <Timer className="w-6" />
             <span className="tabular-nums text-sm">{formatted}</span>
         </div>
     );
